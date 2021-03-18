@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2">
+    <description>The PSR2 coding standard.</description>
+    <file>app</file>
+    <rule ref="PSR2"/>
+    <ini name="memory_limit" value="128M"/>
+    <exclude-pattern>*/migrations/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>_ide_helper.php</exclude-pattern>
+</ruleset>
