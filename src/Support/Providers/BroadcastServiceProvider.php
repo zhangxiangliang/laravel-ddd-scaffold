@@ -16,6 +16,7 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        require base_path('src/App/Broadcast/routes.php');
+        $files = glob(base_path('src/App/Broadcast/Routes/*.php'));
+        collect($files)->map(fn ($route) => require $route);
     }
 }

@@ -36,6 +36,7 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
-        require base_path('src/App/Console/routes.php');
+        $files = glob(base_path('src/App/Console/Routes/*.php'));
+        collect($files)->map(fn ($route) => require $route);
     }
 }
