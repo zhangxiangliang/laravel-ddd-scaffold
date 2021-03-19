@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\User\DataTransferObjects;
+namespace Domain\Miniapp\DataTransferObjects;
 
 use Str;
 use Hash;
@@ -8,7 +8,7 @@ use EasyWeChat;
 use Domain\User\Models\User;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class CreateWechatUserData extends DataTransferObject
+class CreateUserData extends DataTransferObject
 {
     /**
      * 手机
@@ -63,7 +63,7 @@ class CreateWechatUserData extends DataTransferObject
         $authorization = $wechat->auth->session(request()->post('code'));
 
         $user = User::firstOrNew(['openid' => $authorization['openid']], [
-            'mobile' => $authorization['openid'],
+            'mobile' => '',
             'openid' => $authorization['openid'],
             'session_key' => $authorization['session_key'],
 
@@ -74,8 +74,8 @@ class CreateWechatUserData extends DataTransferObject
 
         return new self([
             'mobile' => $user['mobile'],
-            'openid' => $user['openid'],
-            'session_key' => $user['session_key'],
+            'openid' => $authorization['openid'],
+            'session_key' => $authorization['session_key'],
 
             'avatar' => $user['avatar'],
             'username' => $user['username'],
